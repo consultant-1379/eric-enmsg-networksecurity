@@ -1,0 +1,200 @@
+## eric-enmsg-networksecurity image version
+global:
+  pullSecret:
+  registry:
+    url: armdocker.rnd.ericsson.se
+  ingress:
+    enmHost:
+  timezone:
+  ericIngress:
+    enabled: false
+  enmProperties:
+    COM_INF_LDAP_ADMIN_ACCESS:
+    COM_INF_LDAP_PORT:
+    COM_INF_LDAP_ROOT_SUFFIX:
+    COM_INF_LDAP_ADMIN_CN:
+    postgres_service:
+    postgresql01_admin_password:
+    default_security_admin_password:
+    LDAP_ADMIN_CN:
+    LDAP_ADMIN_PASSWORD:
+  ip_version: IPv4
+  loadBalancerIP:
+    networksecurityServiceLoadBalancerIP:
+    networksecurityServiceLoadBalancerIP_IPv6:
+productNumber: "CXC 174 9999"
+productRevision: RSTATE
+labels: {}
+securityPolicy:
+  rolename: netsecserv
+# Number of replicas(pods) to deploy
+replicas-eric-enmsg-networksecurity: 1
+images:
+  eric-enmsg-networksecurity:
+    name: eric-enmsg-networksecurity
+    tag: VERSION
+  eric-enm-httpd:
+    name: eric-enmsg-networksecurity-httpd
+    tag: VERSION
+  eric-enm-monitoring:
+    enabled: true
+    name: eric-enm-monitoring-eap7
+    tag: 1.64.0-33
+  waitForCertificatesContainer:
+    enabled: true
+    name: enm-wait-for-certificates-container
+    tag: 1.52.0-33
+    command:
+imageCredentials:
+  repoPath: proj-enm
+  pullPolicy: IfNotPresent
+  pullSecret:
+  registry:
+    url:
+eric-enm-common-helmchart-library:
+  enabled: true
+## Configure the service
+service:
+  name: netsecserv
+  sgname: networksecurity
+  sgUID: 6190
+  httpdUID: 3273
+  annotations: {}
+  labels:
+  xmlMountPath: "/ericsson/credm/certReqMount"
+  tlsMountPath: "/ericsson/credm/tlsMount"
+# externalTrafficPolicy: Local
+# type: LoadBalancer
+ingress:
+  enabled: false
+ingress_jboss_web_context:
+  enabled: true
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    nginx.ingress.kubernetes.io/proxy-body-size: 100m
+## Configure resource requests and limits
+resources:
+  requests:
+    enabled: true
+    memory: 1536Mi
+  limits:
+    enabled: true
+    memory: 4096Mi
+httpd:
+  enabled: false
+  requests:
+    memory:
+    cpu:
+  limits:
+    memory:
+    cpu:
+monitoring:
+  enabled: false
+  requests:
+    memory:
+    cpu:
+  limits:
+    memory:
+    cpu:
+# StartupProbe Health Check configuration.
+startupProbe:
+  enabled: true
+  command: /ericsson/enm_healthcheck/bin/enm_healthcheck.py
+  arguments: --exec_agents
+  initialDelaySeconds: 10
+  timeoutSeconds: 30
+  periodSeconds: 30
+  failureThreshold: 20
+# LivenessProbe Health Check configuration.
+livenessProbe:
+  enabled: true
+  command: /ericsson/enm_healthcheck/bin/enm_healthcheck.py
+  arguments: --exec_agents
+  initialDelaySeconds: 30
+  timeoutSeconds: 30
+  periodSeconds: 30
+  failureThreshold: 2
+readinessProbe:
+  enabled: true
+  command: /ericsson/enm_healthcheck/bin/enm_healthcheck.py
+  arguments: --exec_agents
+  initialDelaySeconds: 10
+  periodSeconds: 30
+  timeoutSeconds: 30
+  failureThreshold: 1
+# Extra Annotations to be added to pod
+podAnnotations: {}
+## Tolerations for pod assignment
+tolerations: []
+## Affinity for pod assignment
+affinity: requiredDuringSchedulingIgnoredDuringExecution
+# Constrain which nodes your pod is eligible to be scheduled on
+nodeAffinity: {}
+priorityClassName: ""
+## Node selector
+nodeSelector: {}
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxUnavailable: 1
+    maxSurge: 0
+## Pod Disruption Budget is an indicator of the number of disruptions that can be tolerated at a given time.
+podDisruptionBudget:
+  maxUnavailable: 1
+securityContext:
+  supplementalGroups:
+  - 206
+  - 0
+  netsecserv:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+    capabilities:
+      drop:
+      - ALL
+  monitoring:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+    capabilities:
+      drop:
+      - ALL
+  httpd:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: false
+    runAsNonRoot: true
+    capabilities:
+      drop:
+      - ALL
+  waitForCertificatesContainer:
+    allowPrivilegeEscalation: false
+    privileged: false
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
+    capabilities:
+      drop:
+      - ALL
+credmController:
+  name: eric-enm-credm-controller
+  port: 5001
+jobs:
+  jobAction: certrequest
+  certRequest:
+    imageName: enm-certrequestjob-container
+    pullPolicy: Always
+    tag: 1.52.0-33
+    resources:
+      requests:
+        enabled: true
+        cpu: 500m
+        memory: 512Mi
+      limits:
+        enabled: true
+        cpu: 1000m
+        memory: 512Mi
+spec:
+  portHTTP: 8084
+  portHTTPS: 8444

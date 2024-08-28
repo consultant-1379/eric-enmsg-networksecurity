@@ -1,0 +1,176 @@
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamservice
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamapp/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamapp/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamapp/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamcreateneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamcreateneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamcreateneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamdeleteneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamdeleteneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamdeleteneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamrotateneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamrotateneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamrotateneaccountjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamcheckneaccountconfigjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamcheckneaccountconfigjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamcheckneaccountconfigjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamjob/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamjobdetails/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamjobdetails/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamjobdetails/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /npamlibrary/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /locales/en-us/npamlibrary/
+  pathType: ImplementationSpecific
+- backend:
+    service:
+      name: netsecserv
+      port:
+        number: 443
+  path: /help/en-us/npamlibrary/
+  pathType: ImplementationSpecific
+
